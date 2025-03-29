@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Holder : MonoBehaviour
+public class HolderBuilder : MonoBehaviour
 {
 	[SerializeField]
 	private int _nbRows;
