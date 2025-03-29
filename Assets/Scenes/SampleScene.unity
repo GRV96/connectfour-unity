@@ -459,7 +459,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f396b8be32a3b6d43b4eea59d9e0eef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nbRows: 7
-  _nbColumns: 6
+  _nbRows: 6
+  _nbColumns: 7
   _backPanel: {fileID: 973295735}
   _separatorTemplate: {fileID: 763451255137874982, guid: e34ed3c38ecfd3a419610919c5a59362, type: 3}
+  _panelThickness: 0.05
+  _tokenDiameter: 1
+  _tokenThickness: 0.1
