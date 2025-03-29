@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Holder : MonoBehaviour
 {
-	private const float _PANEL_THICKNESS = 0.01f;
+	private const float _PANEL_THICKNESS = 0.05f;
 	private const float _PANEL_THICKNESS_HALF = _PANEL_THICKNESS / 2;
 	private const float _TOKEN_DIAMETER = 1.0f;
 	private const float _TOKEN_THICKNESS = 0.1f;
