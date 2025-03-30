@@ -17,7 +17,7 @@ public class HolderTopPanel : MonoBehaviour
 	public Vector3 BackgroundScale
 	{
 		get { return _background.transform.localScale; }
-		private set { _background.transform.localScale = value; }
+		set { _background.transform.localScale = value; }
 	}
 
 	public float BackgroundThickness
@@ -25,14 +25,7 @@ public class HolderTopPanel : MonoBehaviour
 		get { return _background.transform.localScale.z; }
 	}
 
-	public void Initialize(int pNbColumns, float pButtonDiameter,
-		float pScaleX, float pScaleY, float pScaleZ)
-	{
-		BackgroundScale = new Vector3(pScaleX, pScaleY, pScaleZ);
-		MakeButtons(pNbColumns, pButtonDiameter);
-	}
-
-	private void MakeButtons(int pNbButtons, float pButtonDiameter)
+	public void MakeButtons(int pNbButtons, float pButtonDiameter)
 	{
 		float buttonPosY = BackgroundPosition.y / 2;
 		float buttonPosZ = - BackgroundThickness - _buttonPrefab.Thickness / 2;

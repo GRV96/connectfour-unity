@@ -85,9 +85,9 @@ public class HolderBuilder : MonoBehaviour
 
 	private void BuildTopPanel()
 	{
-		_topPanel.Initialize(_nbColumns, _buttonDiameter,
-			_holderScaleX, _columnWidth, _panelThickness);
 		_topPanel.transform.position = new Vector3(
 			0, (_columnHeight+_columnWidth)/2, _panelThicknessHalf);
+		_topPanel.BackgroundScale = new Vector3(_holderScaleX, _columnWidth, _panelThickness);
+		_topPanel.MakeButtons(_nbColumns, _buttonDiameter);
 	}
 }
