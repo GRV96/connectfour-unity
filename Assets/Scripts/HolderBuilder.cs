@@ -64,7 +64,8 @@ public class HolderBuilder : MonoBehaviour
 		GameObject bottomPanel = Instantiate(_separatorTemplate, transform);
 		Transform bottomPanelTransform = bottomPanel.transform;
 		bottomPanelTransform.position = new Vector3(
-			backPanelScaleXHalf, -backPanelScaleY/2-panelThicknessHalf, -sepScaleZHalf);
-		bottomPanelTransform.localScale = new Vector3(backPanelScaleX, _panelThickness, sepScaleZ);
+			backPanelScaleXHalf, -backPanelScaleY/2-panelThicknessHalf, -sepScaleZHalf+panelThicknessHalf);
+		bottomPanelTransform.localScale = new Vector3(
+			backPanelScaleX, _panelThickness, sepScaleZ+_panelThickness);
 	}
 }
