@@ -52,7 +52,7 @@ public class HolderBuilder : MonoBehaviour
 		float backPanelScaleY = _nbRows * _tokenDiameter;
 
 		Transform backPanelTransform = _backPanel.transform;
-		backPanelTransform.position = new Vector3(backPanelScaleXHalf, 0, panelThicknessHalf);
+		backPanelTransform.position = new Vector3(0, 0, panelThicknessHalf);
 		backPanelTransform.localScale = new Vector3(backPanelScaleX, backPanelScaleY, _panelThickness);
 
 		// The vertical separators
@@ -62,7 +62,7 @@ public class HolderBuilder : MonoBehaviour
 			GameObject separator = Instantiate(_separatorPrefab, transform);
 			separator.name = _NAME_BASE_SEPARATOR + i;
 			Transform separatorTransform = separator.transform;
-			float sepPositionX = i * columnWidth + panelThicknessHalf;
+			float sepPositionX = i * columnWidth + panelThicknessHalf - backPanelScaleXHalf;
 			separatorTransform.position = new Vector3(sepPositionX, 0f, -sepScaleZHalf);
 			separatorTransform.localScale = new Vector3(_panelThickness, backPanelScaleY, sepScaleZ);
 		}
@@ -72,7 +72,7 @@ public class HolderBuilder : MonoBehaviour
 		bottomPanel.name = _NAME_BOTTOM_PANEL;
 		Transform bottomPanelTransform = bottomPanel.transform;
 		bottomPanelTransform.position = new Vector3(
-			backPanelScaleXHalf, -backPanelScaleY/2-panelThicknessHalf, -sepScaleZHalf+panelThicknessHalf);
+			0, -backPanelScaleY/2-panelThicknessHalf, -sepScaleZHalf+panelThicknessHalf);
 		bottomPanelTransform.localScale = new Vector3(
 			backPanelScaleX, _panelThickness, sepScaleZ+_panelThickness);
 
@@ -80,6 +80,6 @@ public class HolderBuilder : MonoBehaviour
 		_topPanel.Initialize(_nbColumns, _buttonDiameter,
 			backPanelScaleX, _tokenDiameter, _panelThickness);
 		_topPanel.transform.position = new Vector3(
-			backPanelScaleXHalf, (backPanelScaleY+_tokenDiameter)/2, panelThicknessHalf);
+			0, (backPanelScaleY+_tokenDiameter)/2, panelThicknessHalf);
 	}
 }
