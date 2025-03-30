@@ -22,6 +22,9 @@ public class HolderBuilder : MonoBehaviour
 	private GameObject _backPanel;
 
 	[SerializeField]
+	private GameObject _frontPanel;
+
+	[SerializeField]
 	private GameObject _separatorPrefab;
 
 	[SerializeField]
@@ -46,17 +49,23 @@ public class HolderBuilder : MonoBehaviour
 		_holderScaleX = _nbColumns * _columnWidth + (_nbColumns + 1) * _panelThickness;
 		_columnHeight = _nbRows * _columnWidth;
 
-		BuildBackPanel();
+		BuildBackAndFrontPanels();
 		BuildBottomPanel();
 		BuildSeparators();
 		BuildTopPanel();
 	}
 
-	private void BuildBackPanel()
+	private void BuildBackAndFrontPanels()
 	{
 		Transform backPanelTransform = _backPanel.transform;
 		backPanelTransform.position = new Vector3(0, 0, _panelThicknessHalf);
 		backPanelTransform.localScale = new Vector3(_holderScaleX, _columnHeight, _panelThickness);
+
+		Transform frontPanelTransform = _frontPanel.transform;
+		frontPanelTransform.position = new Vector3(
+			0, -_panelThicknessHalf, -_columnDepth - _panelThicknessHalf);
+		frontPanelTransform.localScale = new Vector3(
+			_holderScaleX, _columnHeight + _panelThickness, _panelThickness);
 	}
 
 	private void BuildBottomPanel()
