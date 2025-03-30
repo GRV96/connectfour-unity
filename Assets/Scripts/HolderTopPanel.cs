@@ -4,7 +4,7 @@ using UnityEngine;
 public class HolderTopPanel : MonoBehaviour
 {
 	[SerializeField]
-	private GameObject _buttonPrefab;
+	private TokenDropButton _buttonPrefab;
 
 	[SerializeField]
 	private GameObject _background;
@@ -12,13 +12,17 @@ public class HolderTopPanel : MonoBehaviour
 	public Vector3 BackgroundPosition
 	{
 		get { return _background.transform.localPosition; }
-		//set { _background.transform.localScale = value; }
 	}
 
 	public Vector3 BackgroundScale
 	{
 		get { return _background.transform.localScale; }
 		private set { _background.transform.localScale = value; }
+	}
+
+	public float BackgroundThickness
+	{
+		get { return _background.transform.localScale.z; }
 	}
 
 	public void Initialize(int pNbColumns, float pScaleX, float pScaleY, float pScaleZ)
@@ -30,7 +34,7 @@ public class HolderTopPanel : MonoBehaviour
 	private void MakeButtons(int pNbButtons)
 	{
 		float buttonPosY = BackgroundPosition.y / 2;
-		float buttonPosZ = -0.05f;
+		float buttonPosZ = - BackgroundThickness - _buttonPrefab.Thickness / 2;
 		float halfWidth = BackgroundScale.x / 2;
 
 		float buttonDiameter = 0.8f;
@@ -38,9 +42,11 @@ public class HolderTopPanel : MonoBehaviour
 
 		for (int i=0; i<pNbButtons; i++)
 		{
-			GameObject button = Instantiate(_buttonPrefab, transform);
+			TokenDropButton button = Instantiate(_buttonPrefab, transform);
+			button.Diameter = buttonDiameter;
+			button.Index = i;
 			float buttonPosX = (i + 1) * gap + (i + 0.5f) * buttonDiameter;
-			button.transform.localPosition = new Vector3(buttonPosX-halfWidth, buttonPosY, buttonPosZ);
+			button.LocalPosition = new Vector3(buttonPosX-halfWidth, buttonPosY, buttonPosZ);
 		}
 	}
 }
