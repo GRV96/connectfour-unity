@@ -15,6 +15,9 @@ public class HolderBuilder : MonoBehaviour
 	private HolderTopPanel _topPanel;
 
 	[SerializeField]
+	private float _buttonDiameter;
+
+	[SerializeField]
 	private GameObject _backPanel;
 
 	[SerializeField]
@@ -74,7 +77,8 @@ public class HolderBuilder : MonoBehaviour
 			backPanelScaleX, _panelThickness, sepScaleZ+_panelThickness);
 
 		// The top panel
-		_topPanel.Initialize(_nbColumns, backPanelScaleX, _tokenDiameter, _panelThickness);
+		_topPanel.Initialize(_nbColumns, _buttonDiameter,
+			backPanelScaleX, _tokenDiameter, _panelThickness);
 		_topPanel.transform.position = new Vector3(
 			backPanelScaleXHalf, (backPanelScaleY+_tokenDiameter)/2, panelThicknessHalf);
 	}

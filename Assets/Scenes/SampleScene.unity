@@ -615,6 +615,7 @@ MonoBehaviour:
   _nbRows: 6
   _nbColumns: 7
   _topPanel: {fileID: 1791800951}
+  _buttonDiameter: 0.6
   _backPanel: {fileID: 973295735}
   _separatorPrefab: {fileID: 763451255137874982, guid: e34ed3c38ecfd3a419610919c5a59362, type: 3}
   _panelThickness: 0.05
