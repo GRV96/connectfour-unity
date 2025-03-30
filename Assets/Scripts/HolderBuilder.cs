@@ -32,12 +32,6 @@ public class HolderBuilder : MonoBehaviour
 		Build();
 	}
 
-	/*
-	void Update()
-	{
-		//
-	} //*/
-
 	private void Build()
 	{
 		float panelThicknessHalf = _panelThickness / 2;
