@@ -3,6 +3,9 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class HolderBuilder : MonoBehaviour
 {
+	private const string _NAME_BASE_SEPARATOR = "Separator ";
+	private const string _NAME_BOTTOM_PANEL = "BottomPanel";
+
 	[SerializeField]
 	private int _nbRows;
 
@@ -56,6 +59,7 @@ public class HolderBuilder : MonoBehaviour
 		for (int i=0; i<nbSeparators; i++)
 		{
 			GameObject separator = Instantiate(_separatorTemplate, transform);
+			separator.name = _NAME_BASE_SEPARATOR + i;
 			Transform separatorTransform = separator.transform;
 			float sepPositionX = i * columnWidth + panelThicknessHalf;
 			separatorTransform.position = new Vector3(sepPositionX, 0f, -sepScaleZHalf);
@@ -63,6 +67,7 @@ public class HolderBuilder : MonoBehaviour
 		}
 
 		GameObject bottomPanel = Instantiate(_separatorTemplate, transform);
+		bottomPanel.name = _NAME_BOTTOM_PANEL;
 		Transform bottomPanelTransform = bottomPanel.transform;
 		bottomPanelTransform.position = new Vector3(
 			backPanelScaleXHalf, -backPanelScaleY/2-panelThicknessHalf, -sepScaleZHalf+panelThicknessHalf);
