@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HolderBuilder : MonoBehaviour
@@ -37,6 +38,8 @@ public class HolderBuilder : MonoBehaviour
 	private float _holderScaleX;
 	private float _columnHeight;
 
+	private List<float> _columnMiddleXs;
+
 	void Awake()
 	{
 		_panelThicknessHalf = _panelThickness / 2;
@@ -69,15 +72,28 @@ public class HolderBuilder : MonoBehaviour
 
 	private void BuildSeparators()
 	{
-		float columnWidth = _columnWidth + _panelThickness;
 		float holderScaleXHalf = _holderScaleX / 2;
+		float columnWidthHalf = _columnWidth / 2;
+		float columnWidthPlus = _columnWidth + _panelThickness;
+
+		_columnMiddleXs = new();
+
 		int nbSeparators = _nbColumns + 1;
 		for (int i=0; i<nbSeparators; i++)
 		{
 			GameObject separator = Instantiate(_separatorPrefab, transform);
 			separator.name = _NAME_BASE_SEPARATOR + i;
+
+			float iWidthPlus = i * columnWidthPlus;
+			float sepPositionX = iWidthPlus + _panelThicknessHalf - holderScaleXHalf;
+
+			if (i < _nbColumns)
+			{
+				float columnMiddleX = iWidthPlus + _panelThickness + columnWidthHalf;
+				_columnMiddleXs.Add(columnMiddleX);
+			}
+
 			Transform separatorTransform = separator.transform;
-			float sepPositionX = i * columnWidth + _panelThicknessHalf - holderScaleXHalf;
 			separatorTransform.position = new Vector3(sepPositionX, 0f, -_columnDepth/2);
 			separatorTransform.localScale = new Vector3(_panelThickness, _columnHeight, _columnDepth);
 		}
@@ -85,9 +101,10 @@ public class HolderBuilder : MonoBehaviour
 
 	private void BuildTopPanel()
 	{
+		// Build the separators before the top panel.
 		_topPanel.transform.position = new Vector3(
 			0, (_columnHeight+_columnWidth)/2, _panelThicknessHalf);
 		_topPanel.BackgroundScale = new Vector3(_holderScaleX, _columnWidth, _panelThickness);
-		_topPanel.MakeButtons(_nbColumns, _buttonDiameter);
+		_topPanel.MakeButtons(_buttonDiameter, _columnMiddleXs);
 	}
 }

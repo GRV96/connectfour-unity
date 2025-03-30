@@ -25,20 +25,20 @@ public class HolderTopPanel : MonoBehaviour
 		get { return _background.transform.localScale.z; }
 	}
 
-	public void MakeButtons(int pNbButtons, float pButtonDiameter)
+	public void MakeButtons(float pButtonDiameter, List<float> pButtonXPositions)
 	{
 		float buttonPosY = BackgroundPosition.y / 2;
 		float buttonPosZ = - BackgroundThickness - _buttonPrefab.Thickness / 2;
 		float halfWidth = BackgroundScale.x / 2;
-		float gap = (BackgroundScale.x - pNbButtons * pButtonDiameter) / (pNbButtons + 1);
 
-		for (int i=0; i<pNbButtons; i++)
+		int nbButtons = pButtonXPositions.Count;
+		for (int i=0; i<nbButtons; i++)
 		{
 			TokenDropButton button = Instantiate(_buttonPrefab, transform);
 			button.Diameter = pButtonDiameter;
 			button.Index = i;
-			float buttonPosX = (i + 1) * gap + (i + 0.5f) * pButtonDiameter;
-			button.LocalPosition = new Vector3(buttonPosX-halfWidth, buttonPosY, buttonPosZ);
+			float buttonPosX = pButtonXPositions[i]-halfWidth;
+			button.LocalPosition = new Vector3(buttonPosX, buttonPosY, buttonPosZ);
 		}
 	}
 }
