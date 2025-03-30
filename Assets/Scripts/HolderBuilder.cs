@@ -27,44 +27,43 @@ public class HolderBuilder : MonoBehaviour
 	private float _panelThickness = 0.05f;
 
 	[SerializeField]
-	private float _tokenDiameter = 1.0f;
+	private float _columnWidth = 1.0f;
 
 	[SerializeField]
-	private float _tokenThickness = 0.1f;
+	private float _columnDepth = 0.1f;
+
+	// Calculated fields
+	private float _panelThicknessHalf;
+	private float _holderScaleX;
+	private float _columnHeight;
 
 	void Awake()
 	{
+		_panelThicknessHalf = _panelThickness / 2;
+		_holderScaleX = _nbColumns * _columnWidth + (_nbColumns + 1) * _panelThickness;
+		_columnHeight = _nbRows * _columnWidth;
+
 		Build();
 	}
 
 	private void Build()
 	{
-		float panelThicknessHalf = _panelThickness / 2;
-		float columnWidth = _tokenDiameter + _panelThickness;
-
-		// The separators' scale
-		float sepScaleZ = _tokenThickness + panelThicknessHalf;
-		float sepScaleZHalf = sepScaleZ / 2;
-
-		// The back panel
-		float backPanelScaleX = _nbColumns * _tokenDiameter + (_nbColumns + 1) * _panelThickness;
-		float backPanelScaleXHalf = backPanelScaleX / 2;
-		float backPanelScaleY = _nbRows * _tokenDiameter;
-
 		Transform backPanelTransform = _backPanel.transform;
-		backPanelTransform.position = new Vector3(0, 0, panelThicknessHalf);
-		backPanelTransform.localScale = new Vector3(backPanelScaleX, backPanelScaleY, _panelThickness);
+		backPanelTransform.position = new Vector3(0, 0, _panelThicknessHalf);
+		backPanelTransform.localScale = new Vector3(_holderScaleX, _columnHeight, _panelThickness);
 
 		// The vertical separators
+		float columnWidth = _columnWidth + _panelThickness;
+		float holderScaleXHalf = _holderScaleX / 2;
 		int nbSeparators = _nbColumns + 1;
 		for (int i=0; i<nbSeparators; i++)
 		{
 			GameObject separator = Instantiate(_separatorPrefab, transform);
 			separator.name = _NAME_BASE_SEPARATOR + i;
 			Transform separatorTransform = separator.transform;
-			float sepPositionX = i * columnWidth + panelThicknessHalf - backPanelScaleXHalf;
-			separatorTransform.position = new Vector3(sepPositionX, 0f, -sepScaleZHalf);
-			separatorTransform.localScale = new Vector3(_panelThickness, backPanelScaleY, sepScaleZ);
+			float sepPositionX = i * columnWidth + _panelThicknessHalf - holderScaleXHalf;
+			separatorTransform.position = new Vector3(sepPositionX, 0f, -_columnDepth/2);
+			separatorTransform.localScale = new Vector3(_panelThickness, _columnHeight, _columnDepth);
 		}
 
 		// The bottom panel
@@ -72,14 +71,14 @@ public class HolderBuilder : MonoBehaviour
 		bottomPanel.name = _NAME_BOTTOM_PANEL;
 		Transform bottomPanelTransform = bottomPanel.transform;
 		bottomPanelTransform.position = new Vector3(
-			0, -backPanelScaleY/2-panelThicknessHalf, -sepScaleZHalf+panelThicknessHalf);
+			0, -_columnHeight/2-_panelThicknessHalf, -_columnDepth/2+_panelThicknessHalf);
 		bottomPanelTransform.localScale = new Vector3(
-			backPanelScaleX, _panelThickness, sepScaleZ+_panelThickness);
+			_holderScaleX, _panelThickness, _columnDepth+_panelThickness);
 
 		// The top panel
 		_topPanel.Initialize(_nbColumns, _buttonDiameter,
-			backPanelScaleX, _tokenDiameter, _panelThickness);
+			_holderScaleX, _columnWidth, _panelThickness);
 		_topPanel.transform.position = new Vector3(
-			0, (backPanelScaleY+_tokenDiameter)/2, panelThicknessHalf);
+			0, (_columnHeight+_columnWidth)/2, _panelThicknessHalf);
 	}
 }
