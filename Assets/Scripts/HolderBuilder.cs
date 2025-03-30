@@ -43,16 +43,32 @@ public class HolderBuilder : MonoBehaviour
 		_holderScaleX = _nbColumns * _columnWidth + (_nbColumns + 1) * _panelThickness;
 		_columnHeight = _nbRows * _columnWidth;
 
-		Build();
+		BuildBackPanel();
+		BuildBottomPanel();
+		BuildSeparators();
+		BuildTopPanel();
 	}
 
-	private void Build()
+	private void BuildBackPanel()
 	{
 		Transform backPanelTransform = _backPanel.transform;
 		backPanelTransform.position = new Vector3(0, 0, _panelThicknessHalf);
 		backPanelTransform.localScale = new Vector3(_holderScaleX, _columnHeight, _panelThickness);
+	}
 
-		// The vertical separators
+	private void BuildBottomPanel()
+	{
+		GameObject bottomPanel = Instantiate(_separatorPrefab, transform);
+		bottomPanel.name = _NAME_BOTTOM_PANEL;
+		Transform bottomPanelTransform = bottomPanel.transform;
+		bottomPanelTransform.position = new Vector3(
+			0, -_columnHeight/2-_panelThicknessHalf, -_columnDepth/2+_panelThicknessHalf);
+		bottomPanelTransform.localScale = new Vector3(
+			_holderScaleX, _panelThickness, _columnDepth+_panelThickness);
+	}
+
+	private void BuildSeparators()
+	{
 		float columnWidth = _columnWidth + _panelThickness;
 		float holderScaleXHalf = _holderScaleX / 2;
 		int nbSeparators = _nbColumns + 1;
@@ -65,17 +81,10 @@ public class HolderBuilder : MonoBehaviour
 			separatorTransform.position = new Vector3(sepPositionX, 0f, -_columnDepth/2);
 			separatorTransform.localScale = new Vector3(_panelThickness, _columnHeight, _columnDepth);
 		}
+	}
 
-		// The bottom panel
-		GameObject bottomPanel = Instantiate(_separatorPrefab, transform);
-		bottomPanel.name = _NAME_BOTTOM_PANEL;
-		Transform bottomPanelTransform = bottomPanel.transform;
-		bottomPanelTransform.position = new Vector3(
-			0, -_columnHeight/2-_panelThicknessHalf, -_columnDepth/2+_panelThicknessHalf);
-		bottomPanelTransform.localScale = new Vector3(
-			_holderScaleX, _panelThickness, _columnDepth+_panelThickness);
-
-		// The top panel
+	private void BuildTopPanel()
+	{
 		_topPanel.Initialize(_nbColumns, _buttonDiameter,
 			_holderScaleX, _columnWidth, _panelThickness);
 		_topPanel.transform.position = new Vector3(
