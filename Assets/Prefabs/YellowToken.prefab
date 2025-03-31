@@ -116,7 +116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9099508428553320950}
-  - component: {fileID: 2507587987275052575}
+  - component: {fileID: 8278546361674189875}
   m_Layer: 0
   m_Name: YellowToken
   m_TagString: Untagged
@@ -132,7 +132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4937037028627546752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5154963, y: 0, z: -1.5708342}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -140,7 +140,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2507587987275052575
+--- !u!114 &8278546361674189875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4937037028627546752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b8dc9a6578e7041b90eb35eeccc6b9, type: 3}
+  m_Script: {fileID: 11500000, guid: a86cb2ac91853c340b3d82d02da508ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cylinder: {fileID: 82447342540963296}
